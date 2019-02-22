@@ -74,18 +74,7 @@
         hitButton.style.display = 'none'
         stayButton.style.display = 'none'
 
-        showStatus();
 
-        newGameButton.addEventListener('click', function() {
-            gameStarted = true;
-            gameOver = false;
-            playerWon = false;
-            deck = createDeck();
-            textArea.innerText = 'Started...';
-            newGameButton.style.display = 'none';
-            hitButton.style.display = 'inline';
-            stayButton.style.display = 'inline';
-        });
 
         function createDeck() {
             let deck = [];
@@ -102,9 +91,6 @@
             return deck;
         }
 
-
-        let playerCards = [getNextCard(), getNextCard()];
-
         function getCardString(card) {
             return card.value + ' of ' + card.suit;
         }
@@ -112,6 +98,29 @@
         function getNextCard() {
             return deck.shift();
         }
+
+        function showStatus() {
+            if (!gameStarted) {
+                textArea.innerText='Welcome to Blackjack!';
+                return;
+            }
+        }
+
+        newGameButton.addEventListener('click', function() {
+            gameStarted = true;
+            gameOver = false;
+            playerWon = false;
+
+            deck = createDeck();
+            dealerCards = [ getNextCard(), getNextCard()];
+            playerCards = [ getNextCard(), getNextCard()];
+
+            newGameButton.style.display = 'none';
+            hitButton.style.display = 'inline';
+            stayButton.style.display = 'inline';
+            showStatus();
+        });
+
 
 
 
