@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1 id="title">
+        Blackjack
+    </h1>
+    <h4>by Gray Atkinson-Adams</h4>
+    <br>
+    <p id="text-area">
+        Welcome to Blackjack!
+    </p>
+    <button id="new-game-button">
+        New Game!
+    </button>
+    <button id="hit-button">
+        Hit!
+    </button>
+    <button id="stay-button">
+        Stay
+    </button>
+
+    <script>
+
+        // card variables
+        let cardSuits = [
+            "hearts",
+            "diamonds",
+            "spades",
+            "clubs"
+        ];
+
+        let cardValues = [
+            "king",
+            "queen",
+            "jack",
+            "ten",
+            "nine",
+            "eight",
+            "seven",
+            "six",
+            "five",
+            "four",
+            "three",
+            "two",
+            "ace"
+        ];
+
+        // DOM variables
+        let textArea = document.getElementById('text-area');
+        let newGameButton = document.getElementById('new-game-button');
+        let hitButton = document.getElementById('hit-button');
+        let stayButton = document.getElementById('stay-button');
+
+        // game variables
+
+        let gameStarted = false,
+            gameOver = false,
+            playerWon = false,
+            dealerCards = [],
+            playerCards = [],
+            dealerScore = 0,
+            playerScore = 0,
+            deck = [];
+
+        hitButton.style.display = 'none'
+        stayButton.style.display = 'none'
+
+        showStatus();
+
+        newGameButton.addEventListener('click', function() {
+            gameStarted = true;
+            gameOver = false;
+            playerWon = false;
+            deck = createDeck();
+            textArea.innerText = 'Started...';
+            newGameButton.style.display = 'none';
+            hitButton.style.display = 'inline';
+            stayButton.style.display = 'inline';
+        });
+
+        function createDeck() {
+            let deck = [];
+            for (let i = 0; i < cardSuits.length; i++) {
+                for (let j = 0; j < cardValues.length; j++) {
+                    let card = {
+                        suit: cardSuits[i],
+                        value: cardValues[j]
+                    }
+
+                    deck.push(card);
+                }
+            }
+            return deck;
+        }
+
+
+        let playerCards = [getNextCard(), getNextCard()];
+
+        function getCardString(card) {
+            return card.value + ' of ' + card.suit;
+        }
+
+        function getNextCard() {
+            return deck.shift();
+        }
+
+
+
+ 
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
